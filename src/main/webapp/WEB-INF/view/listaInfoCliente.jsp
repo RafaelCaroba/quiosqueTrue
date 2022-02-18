@@ -15,21 +15,19 @@
 		<tr>
 			<th>ID</th>
 			<th>Nome</th>
-			<th>Tipo</th>
-			<th>Validade</th>
-			<th>Vencido?</th>
-			<th>Ver+</th>
+			<th>Endereço</th>
+			<th>Data Nasc.</th>
+			<th>Alterar/Atualizar</th>
 			<th>Excluir</th>
 		</tr>
-		<c:forEach items="${cliente }" var="p">
+		<c:forEach items="${cliente }" var="c">
 			<tr>
-				<td>${p.id }</td>
-				<td>${p.nome }</td>
-				<td>${p.endereco }</td>
-				<td><fmt:formatDate pattern="dd/MM/yyyy" value="${p.dataNasc.time }"/></td>
-				<td></td>
-				<td></td>
-				<td><a href="excluirProduto?idProduto=${p.id }" onclick="return confirm('Deseja excluir?')">Excluir</a></td>
+				<td>${c.id }</td>
+				<td>${c.nome }</td>
+				<td>${c.endereco }</td>
+				<td><fmt:formatDate pattern="dd/MM/yyyy" value="${c.dataNasc.time }"/></td>
+				<td><a href="excluirCliente?idProduto=${c.id }" onclick="return confirm('Deseja excluir?')">Atualizar</a></td>
+				<td><a href="excluirCliente?idProduto=${c.id }" onclick="return confirm('Deseja excluir?')">Excluir</a></td>
 			</tr>
 		</c:forEach>
 	</table>

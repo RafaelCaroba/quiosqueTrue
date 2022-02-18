@@ -8,6 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+
 import br.sp.senai.cotia.model.Cliente;
 
 public class DaoCliente {
@@ -17,7 +20,7 @@ public class DaoCliente {
 		conexao = ConnectionFactory.conectar();
 
 	}
-
+//	inserir um cliente no bd
 	public void Inserir(Cliente cliente) {
 		String sql = "insert into tb_infoclientes"
 				+ "(nome, data_nascimento, endereco, genero, telefone, email, prod_interesse)"
@@ -42,9 +45,9 @@ public class DaoCliente {
 		}
 
 	}
-
+//	listar os clientes atualmente inseridos no bd
 	public List<Cliente> listar() {
-		String sql = "select * from tb_produtos order by nome asc";
+		String sql = "select * from tb_infoclientes order by nome asc";
 		List<Cliente> lista = new ArrayList<Cliente>();
 		PreparedStatement stmt;
 		try {
@@ -82,4 +85,21 @@ public class DaoCliente {
 		}
 
 	}
+//	excluir cliente do bd
+	public void excluir(long id) {
+		String sql = "delete from tb_infoclientes where id = ?";
+		PreparedStatement stmt;
+		try {
+			// conecta o stmt com o bd
+			stmt = conexao.prepareStatement(sql);
+			// id do produto a ser excluido
+			stmt.setLong(1, id);
+			stmt.execute();
+			stmt.close();
+			conexao.close();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
 }

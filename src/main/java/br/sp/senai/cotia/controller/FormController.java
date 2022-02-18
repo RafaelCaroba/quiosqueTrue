@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.sp.cotia.hellospring.dao.DaoProduto;
 import br.sp.senai.cotia.dao.ConnectionFactory;
 import br.sp.senai.cotia.dao.DaoCliente;
 import br.sp.senai.cotia.model.Cliente;
@@ -33,12 +32,23 @@ public class FormController {
 
 		DaoCliente dao = new DaoCliente();
 		dao.Inserir(cliente);
-		return "redirect:listaproduto";
+		return "redirect:listaInfoCliente";
 	}
 	
-//	@RequestMapping("listarProduto")
-//	public String listarClientes(Model model) {
-//		DaoProduto dao = new DaoProduto();
-//		model.addAttribute("produtos", dao.listar());
-//		return "listaproduto";
+	@RequestMapping("listaInfoCliente")
+	public String listarClientes(Model model) {
+		DaoCliente dao = new DaoCliente();
+		model.addAttribute("cliente", dao.listar());
+		return "listaInfoCliente";
 }
+	
+	@RequestMapping("excluirCliente")
+	public String excluir(long idCliente) {
+		DaoCliente dao = new DaoCliente();
+		dao.excluir(idCliente);
+		return "redirect:listaInfoCliente";
+}
+	
+}
+
+
