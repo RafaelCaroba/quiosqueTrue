@@ -16,6 +16,8 @@
 			<th>ID</th>
 			<th>Nome</th>
 			<th>Endereço</th>
+			<th>E-mail</th>
+			<th>E-mail</th>
 			<th>Data Nasc.</th>
 			<th>Alterar/Atualizar</th>
 			<th>Excluir</th>
@@ -25,9 +27,11 @@
 				<td>${c.id }</td>
 				<td>${c.nome }</td>
 				<td>${c.endereco }</td>
+				<td>${c.email }</td>
+				<td>${c.telefone }</td>
 				<td><fmt:formatDate pattern="dd/MM/yyyy" value="${c.dataNasc.time }"/></td>
-				<td><a href="excluirCliente?idProduto=${c.id }" onclick="return confirm('Deseja excluir?')">Atualizar</a></td>
-				<td><a href="excluirCliente?idProduto=${c.id }" onclick="return confirm('Deseja excluir?')">Excluir</a></td>
+				<td><a href="alterarCliente?idCliente=${c.id }" >Atualizar</a></td>
+				<td><a href="excluirCliente?idCliente=${c.id }" onclick="return confirm('Deseja excluir?')">Excluir</a></td>
 			</tr>
 		</c:forEach>
 	</table>

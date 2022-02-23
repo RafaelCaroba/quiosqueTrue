@@ -6,7 +6,7 @@ import java.util.Calendar;
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class Cliente {
-	private int id;
+	private Long id;
 	private String nome;
 	private String endereco;
 	private String telefone;
@@ -15,10 +15,10 @@ public class Cliente {
 	private String genero;
 	private String email;
 	private String prodInteresse;
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getNome() {

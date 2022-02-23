@@ -49,6 +49,15 @@ public class FormController {
 		return "redirect:listaInfoCliente";
 }
 	
+	@RequestMapping("alterarCliente")
+	public String alterar(long idCliente, Model model) {
+		DaoCliente dao = new DaoCliente();
+		// aspas devem ser iguais a variavel do form
+		model.addAttribute("cliente", dao.buscar(idCliente));
+		
+		return "forward:formCliente";
+	}
+	
 }
 
 
