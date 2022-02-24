@@ -5,6 +5,9 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -22,14 +25,17 @@ public class DaoCliente {
 		conexao = ConnectionFactory.conectar();
 
 	}
+
 //	inserir um cliente no bd
 	public void Inserir(Cliente cliente) {
 		String sql = "insert into tb_infoclientes"
 				+ "(nome, data_nascimento, endereco, genero, telefone, email, prod_interesse)"
-				+ "values (?,?,?,?,?,?,?)";
+				+ "values (?,?,?,?,?,?,?,?)";
 		PreparedStatement stmt;
 		try {
 			stmt = conexao.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+
 			stmt.setString(1, cliente.getNome());
 			stmt.setDate(2, new Date(cliente.getDataNasc().getTimeInMillis()));
 			stmt.setString(3, cliente.getEndereco());
@@ -47,6 +53,7 @@ public class DaoCliente {
 		}
 
 	}
+
 //	listar os clientes atualmente inseridos no bd
 	public List<Cliente> listar() {
 		String sql = "select * from tb_infoclientes order by nome asc";
@@ -58,7 +65,7 @@ public class DaoCliente {
 			while (rs.next()) {
 				Cliente c = new Cliente();
 				c.setId(rs.getLong("id"));
-				
+
 				c.setNome(rs.getString("nome"));
 				c.setEndereco(rs.getString("endereco"));
 				c.setGenero(rs.getString("genero"));
@@ -87,6 +94,7 @@ public class DaoCliente {
 		}
 
 	}
+
 //	excluir cliente do bd
 	public void excluir(long id) {
 		String sql = "delete from tb_infoclientes where id = ?";
@@ -103,7 +111,7 @@ public class DaoCliente {
 			throw new RuntimeException(e);
 		}
 	}
-	
+
 //	faz parte do alterarCliente(); parte de atualizar
 	public void atualizar(Cliente cliente) {
 		String sql = "uptade tb_infoclientes set nome = ?,  data_nascimento = ?, endereco = ?, "
@@ -119,7 +127,7 @@ public class DaoCliente {
 			stmt.setString(6, cliente.getEmail());
 			stmt.setString(7, cliente.getProdInteresse());
 			stmt.setLong(8, cliente.getId());
-			
+
 			stmt.execute();
 			stmt.close();
 			conexao.close();
@@ -127,9 +135,8 @@ public class DaoCliente {
 			throw new RuntimeException(e);
 		}
 	}
-	
-	
-	public Cliente buscar(long idCliente){
+
+	public Cliente buscar(long idCliente) {
 		String sql = "select * from tb_infoclientes where id = ?";
 		Cliente c = null;
 		PreparedStatement stmt;
@@ -137,7 +144,7 @@ public class DaoCliente {
 			stmt = conexao.prepareStatement(sql);
 			stmt.setLong(1, idCliente);
 			ResultSet rs = stmt.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				c = new Cliente();
 				c.setId(rs.getLong("id"));
 				c.setNome(rs.getString("nome"));
@@ -145,28 +152,25 @@ public class DaoCliente {
 				c.setEmail(rs.getString("email"));
 				c.setGenero(rs.getString("genero"));
 				c.setTelefone(rs.getString("telefone"));
-				//criar um calendar
+				// criar um calendar
 				Calendar nascimento = Calendar.getInstance();
-				//extrair o date do resultset
+				// extrair o date do resultset
 				Date dataBd = rs.getDate("data_nascimento");
-				//setar a data no resultset
+				// setar a data no resultset
 				nascimento.setTimeInMillis(dataBd.getTime());
-				//setar a validade no produto
+				// setar a validade no produto
 				c.setDataNasc(nascimento);
-				
-				
+				c.setProdInteresse(rs.getString("prod_interesse"));
+
 			}
 			rs.close();
 			stmt.close();
 			conexao.close();
 			return c;
-		}catch(Exception e) {
-		throw new RuntimeException(e);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+
+		}
 
 	}
-	
-	
-	
-	
-}
 }

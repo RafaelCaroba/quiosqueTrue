@@ -19,6 +19,7 @@
 			<th>E-mail</th>
 			<th>E-mail</th>
 			<th>Data Nasc.</th>
+			<th>Prod. inteeresse</th>
 			<th>Alterar/Atualizar</th>
 			<th>Excluir</th>
 		</tr>
@@ -30,6 +31,7 @@
 				<td>${c.email }</td>
 				<td>${c.telefone }</td>
 				<td><fmt:formatDate pattern="dd/MM/yyyy" value="${c.dataNasc.time }"/></td>
+				<td>${c.prodInteresse }</td>
 				<td><a href="alterarCliente?idCliente=${c.id }" >Atualizar</a></td>
 				<td><a href="excluirCliente?idCliente=${c.id }" onclick="return confirm('Deseja excluir?')">Excluir</a></td>
 			</tr>

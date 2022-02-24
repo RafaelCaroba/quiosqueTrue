@@ -1,6 +1,7 @@
 package br.sp.senai.cotia.model;
 
 
+import java.sql.Timestamp;
 import java.util.Calendar;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -15,6 +16,10 @@ public class Cliente {
 	private String genero;
 	private String email;
 	private String prodInteresse;
+	private Calendar dataCadastro;
+	
+	
+	
 	public long getId() {
 		return id;
 	}
@@ -62,6 +67,12 @@ public class Cliente {
 	}
 	public void setProdInteresse(String prodInteresse) {
 		this.prodInteresse = prodInteresse;
+	}
+	public Calendar getDataCadastro() {
+		return dataCadastro;
+	}
+	public void setDataCadastro(Calendar dataCadastro) {
+		this.dataCadastro = dataCadastro;
 	}
 	
 	
