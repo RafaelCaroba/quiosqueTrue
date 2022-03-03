@@ -37,5 +37,7 @@
 			</tr>
 		</c:forEach>
 	</table>
+	<a href="estatisticas"><button>Estatisticas</button></a>
+	
 </body>
 </html>

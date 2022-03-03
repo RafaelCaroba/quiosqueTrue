@@ -30,9 +30,16 @@ public class FormController {
 
 		LocalTime data_cadastro = LocalTime.now();
 		System.out.println(data_cadastro);
-
+		
 		DaoCliente dao = new DaoCliente();
-		dao.Inserir(cliente);
+		
+		if (cliente.getId() == null) {
+			dao.Inserir(cliente);
+		} else {
+			dao.atualizar(cliente);
+		}
+
+		
 		return "redirect:listaInfoCliente";
 	}
 
@@ -61,7 +68,7 @@ public class FormController {
 	
 	
 
-	@RequestMapping("Estatisticas")
+	@RequestMapping("estatisticas")
 	public String exibeEstatisticas(Model model) {
 		DaoCliente dao = new DaoCliente();
 		

@@ -30,11 +30,11 @@ public class DaoCliente {
 	public void Inserir(Cliente cliente) {
 		String sql = "insert into tb_infoclientes"
 				+ "(nome, data_nascimento, endereco, genero, telefone, email, prod_interesse)"
-				+ "values (?,?,?,?,?,?,?,?)";
+				+ "values (?,?,?,?,?,?,?)";
 		PreparedStatement stmt;
 		try {
 			stmt = conexao.prepareStatement(sql);
-			ResultSet rs = stmt.executeQuery();
+			
 
 			stmt.setString(1, cliente.getNome());
 			stmt.setDate(2, new Date(cliente.getDataNasc().getTimeInMillis()));
@@ -114,8 +114,8 @@ public class DaoCliente {
 
 //	faz parte do alterarCliente(); parte de atualizar
 	public void atualizar(Cliente cliente) {
-		String sql = "uptade tb_infoclientes set nome = ?,  data_nascimento = ?, endereco = ?, "
-				+ "genero = ?, telefone = ?, email = ?, prod_interesse = ?";
+		String sql = "update tb_infoclientes set nome = ?,  data_nascimento = ?, endereco = ?, "
+				+ "genero = ?, telefone = ?, email = ?, prod_interesse = ? where id = ?";
 		PreparedStatement stmt;
 		try {
 			stmt = conexao.prepareStatement(sql);
